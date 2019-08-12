@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.example.sfmtesting">
+
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+
+    <application
+        android:allowBackup="true"
+        android:appComponentFactory="@string/app_name"
+        android:icon="@drawable/parama"
+        android:label="SFA"
+        android:screenOrientation="portrait"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true"
+        tools:ignore="GoogleAppIndexingWarning"
+        tools:replace="android:appComponentFactory">
+        <activity android:name=".ReturPutriActivity"></activity>
+        <activity android:name=".ReturMOActivity" />
+        <activity android:name=".ReturEminaActivity" />
+        <activity android:name=".ReturWardahActivity" />
+        <activity android:name=".ReturBrandActivity" />
+        <activity android:name=".ListBarangDOActivity" />
+        <activity android:name=".BarangDOActivity" />
+        <activity android:name=".ListProdukDipesanActivity" />
+        <activity android:name=".ListTokoOrderActivity" />
+        <activity android:name=".ReportActivity" />
+        <activity android:name=".TokoActivity" />
+        <activity android:name=".KunjunganYangBelumActivity" />
+        <activity android:name=".ReasonNotVisitActivity" />
+        <activity android:name=".Splash">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".SignatureActivity" />
+        <activity android:name=".ReasonNotECActivitty" />
+        <activity android:name=".ReasonActivity" />
+        <activity android:name=".KunjunganActivity" />
+        <activity android:name=".HistoricalSalesPutriActivity" />
+        <activity android:name=".HistoricalSalesEminaActivity" />
+        <activity android:name=".HistoricalSalesMOActivity" />
+        <activity android:name=".HistoricalSalesWardahActivity" />
+        <activity android:name=".DashboardActivity" />
+        <activity android:name=".MainActivity" />
+        <activity android:name=".VisitActivity" />
+        <activity android:name=".PencapaianActivity" />
+        <activity android:name=".TakingOrderBrandActivity" />
+        <activity android:name=".TakingOrderActivity" />
+        <activity android:name=".ScanActivity" />
+        <activity android:name=".ScanhisteminaActivity" />
+        <activity android:name=".ScanhistmoActivity" />
+        <activity android:name=".ScanhistputriActivity" />
+        <activity android:name=".ScanmhseminaActivity" />
+        <activity android:name=".ScanmhsmoActivity" />
+        <activity android:name=".ScanmhsputriActivity" />
+        <activity android:name=".ScanmhswardahActivity" />
+        <activity android:name=".ScannpdeminaActivity" />
+        <activity android:name=".ScannpdmoActivity" />
+        <activity android:name=".ScannpdputriActivity" />
+        <activity android:name=".ScannpdwardahActivity" />
+        <activity
+            android:name=".RingkasanWardahActivity"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".RingkasanEminaActivity"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".RingkasanMOActivity"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".RingkasanPutriActivity"
+            android:windowSoftInputMode="adjustPan" />
+    </application>
+
+</manifest>

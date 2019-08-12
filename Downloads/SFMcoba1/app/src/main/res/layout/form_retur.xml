@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/hkode_odoo_form"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:ems="6"
+        android:text="Kode odoo"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/hpcs_produk_form"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:ems="6"
+        android:text="Pcs(koli)"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/nama_produk_form" />
+
+    <TextView
+        android:id="@+id/hnama_produk_form"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:ems="6"
+        android:text="Nama produk"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/hkode_odoo_form" />
+
+    <TextView
+        android:id="@+id/hharga_form"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:ems="6"
+        android:text="Harga produk"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/hpcs_produk_form" />
+
+    <TextView
+        android:id="@+id/wws_form"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="12dp"
+        android:ems="6"
+        android:text="Jumlah retur"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/hharga_form" />
+
+    <TextView
+        android:id="@+id/kode_odoo_form"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:ems="5"
+        android:text=""
+        android:textSize="18sp"
+        app:layout_constraintStart_toEndOf="@id/hkode_odoo_form"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/pcs_produk_form"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:ems="3"
+        android:text=""
+        android:textSize="18sp"
+        app:layout_constraintStart_toEndOf="@id/hpcs_produk_form"
+        app:layout_constraintTop_toBottomOf="@id/nama_produk_form" />
+
+    <TextView
+        android:id="@+id/nama_produk_form"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:ems="18"
+        android:text=""
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@id/hnama_produk_form"
+        app:layout_constraintTop_toBottomOf="@id/kode_odoo_form" />
+
+    <TextView
+        android:id="@+id/harga_form"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:ems="4"
+        android:text="Rp. "
+        android:textSize="18sp"
+        app:layout_constraintStart_toEndOf="@id/hharga_form"
+        app:layout_constraintTop_toBottomOf="@id/pcs_produk_form"/>
+
+    <EditText
+        android:id="@+id/qty_form"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@android:drawable/editbox_background_normal"
+        android:ems="4"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
+        android:hint="qty"
+        android:inputType="numberDecimal"
+        android:textSize="18sp"
+        app:layout_constraintStart_toEndOf="@id/wws_form"
+        app:layout_constraintTop_toBottomOf="@id/harga_form"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

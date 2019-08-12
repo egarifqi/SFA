@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Splash"
+    android:background="@color/activeTab">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:paddingLeft="15dp"
+        android:text="Server Configuration"
+        android:textColor="#141414"
+        android:textStyle="bold"
+        android:textSize="16dp"
+        android:layout_marginRight="10dp"/>
+
+
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/imageView"
+        android:layout_marginTop="45dp"
+        android:id="@+id/edit_url">
+        <EditText
+            android:id="@+id/url"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Type the URL"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:imeActionId="6"
+            android:backgroundTint="@color/colorPrimaryTriad2"
+            android:textCursorDrawable="@color/colorPrimaryTriad2"
+            android:imeActionLabel="@string/action_sign_in_short"
+            android:imeOptions="actionUnspecified"
+            android:maxLines="1"
+            android:singleLine="true" />
+    </android.support.design.widget.TextInputLayout>
+
+    <Button
+        android:id="@+id/button_url"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="SEND"
+        android:layout_below="@+id/edit_url"
+        android:textSize="20dp"
+        android:textColor="#ffffff"
+        style="@style/AppTheme"
+        android:layout_marginRight="30dp"
+        android:layout_marginLeft="30dp"
+        android:backgroundTint="@color/tangerine"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="40dp"
+        android:textStyle="bold"/>
+
+</RelativeLayout>
