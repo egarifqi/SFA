@@ -44,6 +44,8 @@ import org.json.JSONObject;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+import me.xdrop.fuzzywuzzy.FuzzySearch;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -93,13 +95,41 @@ public class NPDEminaFragment extends Fragment {
         mySearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String s) {
-                adapter.getFilter().filter(s);
+                for(int i = 0; i < spacecrafts.size(); i++){
+                    Log.d("FUZZY RATIO "+s+" : "+spacecrafts.get(i).getNamaproduk(), ""+ FuzzySearch.partialRatio(s, spacecrafts.get(i).getNamaproduk()));
+                    if(s.length() == 0){
+                        spacecrafts.get(i).setFuzzyMatchStatus("fuzzymatched");
+                    }
+                    else {
+                        if(FuzzySearch.partialRatio(s.toLowerCase(), spacecrafts.get(i).getNamaproduk().toLowerCase()+" "+spacecrafts.get(i).getKodeodoo()+" "+spacecrafts.get(i).getBarcode()) > 80){
+                            spacecrafts.get(i).setFuzzyMatchStatus("fuzzymatched");
+                        }
+                        else {
+                            spacecrafts.get(i).setFuzzyMatchStatus("fuzzynotmatched");
+                        }
+                    }
+                }
+                adapter.getFilter().filter("fuzzymatched");
                 return false;
             }
 
             @Override
             public boolean onQueryTextChange(String query) {
-                adapter.getFilter().filter(query);
+                for(int i = 0; i < spacecrafts.size(); i++){
+                    Log.d("FUZZY RATIO "+query+" : "+spacecrafts.get(i).getNamaproduk(), ""+ FuzzySearch.partialRatio(query, spacecrafts.get(i).getNamaproduk()));
+                    if(query.length() == 0){
+                        spacecrafts.get(i).setFuzzyMatchStatus("fuzzymatched");
+                    }
+                    else {
+                        if(FuzzySearch.partialRatio(query.toLowerCase(), spacecrafts.get(i).getNamaproduk().toLowerCase()+" "+spacecrafts.get(i).getKodeodoo()+" "+spacecrafts.get(i).getBarcode()) > 80){
+                            spacecrafts.get(i).setFuzzyMatchStatus("fuzzymatched");
+                        }
+                        else {
+                            spacecrafts.get(i).setFuzzyMatchStatus("fuzzynotmatched");
+                        }
+                    }
+                }
+                adapter.getFilter().filter("fuzzymatched");
                 return false;
             }
         });
@@ -521,9 +551,10 @@ public class NPDEminaFragment extends Fragment {
                 for (int i = 0; i < currentList.size(); i++) {
                     spacecraft = currentList.get(i);
 //SEARCH
-                    if (spacecraft.getKodeodoo().toUpperCase().contains(constraint) ||
-                            spacecraft.getNamaproduk().toUpperCase().contains(constraint) ||
-                            spacecraft.getBarcode().toUpperCase().contains(constraint)) {
+//                    if (spacecraft.getKodeodoo().toUpperCase().contains(constraint) ||
+//                            spacecraft.getNamaproduk().toUpperCase().contains(constraint) ||
+//                            spacecraft.getBarcode().toUpperCase().contains(constraint)) {
+                    if (spacecraft.getFuzzyMatchStatus().toUpperCase().contains(constraint)){
 //ADD IF FOUND
                         foundFilters.add(spacecraft);
                     }

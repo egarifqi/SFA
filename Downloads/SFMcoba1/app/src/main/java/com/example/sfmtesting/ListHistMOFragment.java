@@ -462,9 +462,10 @@ public class ListHistMOFragment extends Fragment {
                 for (int i = 0; i < currentList.size(); i++) {
                     spacecraft = currentList.get(i);
 //SEARCH
-                    if (spacecraft.getKodeodoo().toUpperCase().contains(constraint) ||
-                            spacecraft.getNamaproduk().toUpperCase().contains(constraint) ||
-                            spacecraft.getBarcode().toUpperCase().contains(constraint)) {
+//                    if (spacecraft.getKodeodoo().toUpperCase().contains(constraint) ||
+//                            spacecraft.getNamaproduk().toUpperCase().contains(constraint) ||
+//                            spacecraft.getBarcode().toUpperCase().contains(constraint)) {
+                    if (spacecraft.getFuzzyMatchStatus().toUpperCase().contains(constraint)){
 //ADD IF FOUND
                         foundFilters.add(spacecraft);
                     }
