@@ -59,4 +59,5 @@ dependencies {
     implementation 'androidx.core:core:1.0.2'
     implementation "io.reactivex.rxjava2:rxjava:$rootProject.rxjava2Version"
     implementation "io.reactivex.rxjava2:rxandroid:$rootProject.rxandroidVersion"
+    implementation 'me.xdrop:fuzzywuzzy:1.2.0'
 }
