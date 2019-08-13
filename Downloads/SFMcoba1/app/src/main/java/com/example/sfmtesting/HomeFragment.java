@@ -180,8 +180,6 @@ public class HomeFragment extends Fragment {
                         progress = 0;
                     }
 
-                    progress = 195;
-
                     persenTV.setText(progress+"%");
 
                     if(progress <= 100){
