@@ -179,8 +179,19 @@ public class HomeFragment extends Fragment {
                     } else {
                         progress = 0;
                     }
-                    progressBar.setProgress((int) progress);
+
+                    progress = 195;
+
                     persenTV.setText(progress+"%");
+
+                    if(progress <= 100){
+                        progress = progress/2;
+                    }
+                    else {
+                        progress = progress*3/8;
+                    }
+                    progressBar.setProgress((int) progress);
+
 
                 } catch (JSONException e) {
                     Log.e("CANT PARSE JSON", e.getMessage());
