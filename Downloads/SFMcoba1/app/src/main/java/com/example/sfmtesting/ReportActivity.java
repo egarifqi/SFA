@@ -7,12 +7,14 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.app.DatePickerDialog;
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -20,6 +22,7 @@ import android.widget.EditText;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -64,6 +67,7 @@ public class ReportActivity extends AppCompatActivity {
     EditText endDateET;
     String selectedDate;
     String selectedEndDate;
+    LinearLayout summaryData;
     DatePickerDialog dialogStart, dialogEnd;
 
 
@@ -145,6 +149,7 @@ public class ReportActivity extends AppCompatActivity {
         final TextView ec = findViewById(R.id.nilaivisit);
         final TextView totalso = findViewById(R.id.nilaiso);
         final TextView totaldo = findViewById(R.id.nilaido);
+        final LinearLayout summaryData = findViewById(R.id.summary_data);
 
         final int[] totalcall = {0};
         final int[] totalec = {0};
@@ -155,6 +160,10 @@ public class ReportActivity extends AppCompatActivity {
         summary.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (view != null) {
+                    InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+                }
                 final String start = dateOfBirthET.getText().toString();
                 String end = endDateET.getText().toString();
                 Date startDate = new Date();
@@ -272,6 +281,7 @@ public class ReportActivity extends AppCompatActivity {
 //                                    Log.e("adapter", ""+listViewAdapter.getItem(i).toString());
                                     final ListViewAdapter listViewAdapter = new ListViewAdapter(summaries);
                                     listView.setAdapter(listViewAdapter);
+                                    summaryData.setVisibility(View.VISIBLE);
 
                                 } catch (JSONException e) {
                                     Log.e("CANT PARSE JSON", e.getMessage());

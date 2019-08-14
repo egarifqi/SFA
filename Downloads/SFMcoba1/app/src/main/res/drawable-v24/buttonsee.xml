@@ -14,11 +14,11 @@
     <!-- corner radius-->
 
     <solid
-        android:color="#9FBDE2"
+        android:color="#65cee1"
         />
     <corners
 
-        android:radius="40dp" />
+        android:radius="10dp" />
 
 
 </shape>
