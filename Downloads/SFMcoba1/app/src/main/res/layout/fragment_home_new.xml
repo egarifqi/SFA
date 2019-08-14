@@ -660,6 +660,8 @@
                                 android:gravity="center"
                                 android:scaleY="3"
                                 android:progress="50"
+                                android:progressBackgroundTint="#7c7c7d"
+                                android:progressTint="#6a6a6b"
                                 />
 
                         </RelativeLayout>
