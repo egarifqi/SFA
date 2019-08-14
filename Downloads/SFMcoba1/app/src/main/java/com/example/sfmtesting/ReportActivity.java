@@ -25,6 +25,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.common.Priority;
@@ -65,10 +66,16 @@ public class ReportActivity extends AppCompatActivity {
     ImageView imgProfile;
     EditText dateOfBirthET;
     EditText endDateET;
+    TextView textSummaryEmpty;
     String selectedDate;
     String selectedEndDate;
     LinearLayout summaryData;
     DatePickerDialog dialogStart, dialogEnd;
+
+    int totalcall;
+    int totalec;
+    int sototal;
+    int dototal;
 
 
     @Override
@@ -95,6 +102,7 @@ public class ReportActivity extends AppCompatActivity {
 
         dateOfBirthET = findViewById(R.id.tv);
         endDateET = findViewById(R.id.tv2);
+        textSummaryEmpty = findViewById(R.id.text_summary_empty);
 
         final ConstraintLayout constraintLayout = findViewById(R.id.header_summary);
 
@@ -151,11 +159,6 @@ public class ReportActivity extends AppCompatActivity {
         final TextView totaldo = findViewById(R.id.nilaido);
         final LinearLayout summaryData = findViewById(R.id.summary_data);
 
-        final int[] totalcall = {0};
-        final int[] totalec = {0};
-        final int[] sototal = {0};
-        final int[] dototal = {0};
-
         Button summary = findViewById(R.id.btn2);
         summary.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -169,138 +172,152 @@ public class ReportActivity extends AppCompatActivity {
                 Date startDate = new Date();
                 Date endDate = new Date();
 
-                totalcall[0] = 0;
-                totalec[0] = 0;
-                sototal[0] = 0;
-                dototal[0] = 0;
+                totalcall = 0;
+                totalec = 0;
+                sototal = 0;
+                dototal = 0;
+                salesorder.clear();
+                deliveryorder.clear();
+
 
                 summaries.clear();
 
-                try {
-                    startDate = new SimpleDateFormat("yyyy-MM-dd").parse(start);
-                    Log.e("Tanggal Mulai", "" + startDate);
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
+                if(start.length() == 0 || end.length() == 0){
+                    Toast.makeText(getApplicationContext(),"Pilihan tanggal tidak boleh kosong!", Toast.LENGTH_SHORT).show();
+                } else {
+                    try {
+                        startDate = new SimpleDateFormat("yyyy-MM-dd").parse(start);
+                        Log.e("Tanggal Mulai", "" + startDate);
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
 
-                try {
-                    endDate = new SimpleDateFormat("yyyy-MM-dd").parse(end);
-                    Log.e("Tanggal Selesai", "" + endDate);
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
+                    try {
+                        endDate = new SimpleDateFormat("yyyy-MM-dd").parse(end);
+                        Log.e("Tanggal Selesai", "" + endDate);
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
 
-                String url = "https://sfa-api.pti-cosmetics.com/v_all_summary?sales_id=eq." + sales_id;
-                final Date finalStartDate = startDate;
-                final Date finalEndDate = endDate;
-                AndroidNetworking.get(url)
-                        .setPriority(Priority.HIGH)
-                        .build()
-                        .getAsJSONArray(new JSONArrayRequestListener() {
-                            @Override
-                            public void onResponse(JSONArray response) {
-                                JSONObject jo;
-                                Summary s = new Summary();
-                                boolean check = false;
-                                int index = 0;
-                                try {
-                                    for (int i = 0; i < response.length(); i++) {
-                                        jo = response.getJSONObject(i);
-                                        String date = jo.getString("write_date");
-                                        int call = jo.getInt("call");
-                                        int notcall = jo.getInt("notcall");
-                                        int ec = jo.getInt("ec");
-                                        int notec = jo.getInt("notec");
-                                        int penjualan = jo.getInt("penjualan_total");
-                                        int delivorder = jo.getInt("pencapaian_total");
-                                        int mcp = jo.getInt("mcp");
-                                        boolean inroute = jo.getBoolean("inroute");
+                    String url = "https://sfa-api.pti-cosmetics.com/v_all_summary?sales_id=eq." + sales_id;
+                    final Date finalStartDate = startDate;
+                    final Date finalEndDate = endDate;
+                    AndroidNetworking.get(url)
+                            .setPriority(Priority.HIGH)
+                            .build()
+                            .getAsJSONArray(new JSONArrayRequestListener() {
+                                @Override
+                                public void onResponse(JSONArray response) {
+                                    JSONObject jo;
+                                    Summary s = new Summary();
+                                    boolean check = false;
+                                    int index = 0;
+                                    try {
+                                        for (int i = 0; i < response.length(); i++) {
+                                            jo = response.getJSONObject(i);
+                                            String date = jo.getString("write_date");
+                                            int call = jo.getInt("call");
+                                            int notcall = jo.getInt("notcall");
+                                            int ec = jo.getInt("ec");
+                                            int notec = jo.getInt("notec");
+                                            int penjualan = jo.getInt("penjualan_total");
+                                            int delivorder = jo.getInt("pencapaian_total");
+                                            int mcp = jo.getInt("mcp");
+                                            boolean inroute = jo.getBoolean("inroute");
 
 
-                                        Date tanggal = new SimpleDateFormat("yyyy-MM-dd").parse(date);
+                                            Date tanggal = new SimpleDateFormat("yyyy-MM-dd").parse(date);
 
-                                        if ((finalStartDate.before(tanggal) || finalStartDate.equals(tanggal)) && (finalEndDate.after(tanggal) || finalEndDate.equals(tanggal))) {
-                                            s.setTanggal(tanggal);
-                                            s.setCall(call);
-                                            s.setNotCall(notcall);
-                                            s.setEC(ec);
-                                            s.setNotEC(notec);
-                                            s.setPenjualan(penjualan);
-                                            s.setTotal_do(delivorder);
-                                            s.setInroute(inroute);
-                                            s.setMcp(mcp);
+                                            if ((finalStartDate.before(tanggal) || finalStartDate.equals(tanggal)) && (finalEndDate.after(tanggal) || finalEndDate.equals(tanggal))) {
+                                                s.setTanggal(tanggal);
+                                                s.setCall(call);
+                                                s.setNotCall(notcall);
+                                                s.setEC(ec);
+                                                s.setNotEC(notec);
+                                                s.setPenjualan(penjualan);
+                                                s.setTotal_do(delivorder);
+                                                s.setInroute(inroute);
+                                                s.setMcp(mcp);
 
 
 //                                            Log.e("Data Masuk", s.toString());
-                                            summaries.add(s);
+                                                summaries.add(s);
 
-                                            totalcall[0] += call;
-                                            totalec[0] += ec;
-                                            calllist.add(call);
-                                            eclist.add(ec);
-                                            routelist.add(inroute);
-                                            salesorder.add(penjualan);
-                                            deliveryorder.add(delivorder);
-                                            orderdate.add(tanggal);
+                                                totalcall += call;
+                                                totalec += ec;
+                                                calllist.add(call);
+                                                eclist.add(ec);
+                                                routelist.add(inroute);
+                                                salesorder.add(penjualan);
+                                                deliveryorder.add(delivorder);
+                                                orderdate.add(tanggal);
 //                                            sototal[0] += penjualan;
 //                                            dototal[0] += delivorder;
 
 //                                            sototal[0] += summaries.get(index).getPenjualan();
 //                                            dototal[0] += summaries.get(index).getTotal_do();
 
-                                            index++;
+                                                index++;
 
-                                            Log.e("Total SO", "Rp. " + sototal[0] + ", Penjualan : " + penjualan);
+                                                Log.e("Total SO", "Rp. " + sototal + ", Penjualan : " + penjualan);
 //                                            listViewAdapter.notifyDataSetChanged();
 //                                            Log.e("adapter", ""+listViewAdapter.getItem(i).toString());
+                                            }
                                         }
-                                    }
 
-                                    if (salesorder.size() > 0 && deliveryorder.size() > 0) {
-                                        sototal[0] += salesorder.get(0);
-                                        dototal[0] += deliveryorder.get(0);
-                                    }
-
-                                    for (int j = 1; j < salesorder.size(); j++) {
-                                        Log.e("WOW", orderdate.get(j).toString());
-                                        if (!orderdate.get(j).equals(orderdate.get(j - 1))) {
-                                            sototal[0] += salesorder.get(j);
-                                            dototal[0] += deliveryorder.get(j);
-                                            Log.e("Penjualan", salesorder.get(j) + ", SO : " + sototal[0]);
+                                        if (salesorder.size() > 0 && deliveryorder.size() > 0) {
+                                            sototal += salesorder.get(0);
+                                            dototal += deliveryorder.get(0);
                                         }
-                                    }
 
-                                    call.setText(String.valueOf(totalcall[0]));
-                                    ec.setText(String.valueOf(totalec[0]));
-                                    Locale localeID = new Locale("in", "ID");
-                                    NumberFormat formatRP = NumberFormat.getCurrencyInstance(localeID);
-                                    totalso.setText(formatRP.format(sototal[0]));
-                                    totaldo.setText(formatRP.format(dototal[0]));
+                                        for (int j = 1; j < salesorder.size(); j++) {
+                                            Log.e("WOW", orderdate.get(j).toString());
+                                            if (!orderdate.get(j).equals(orderdate.get(j - 1))) {
+                                                sototal += salesorder.get(j);
+                                                dototal += deliveryorder.get(j);
+                                                Log.e("Penjualan", salesorder.get(j) + ", SO : " + sototal);
+                                            }
+                                        }
+
+                                        call.setText(String.valueOf(totalcall));
+                                        ec.setText(String.valueOf(totalec));
+                                        Locale localeID = new Locale("in", "ID");
+                                        NumberFormat formatRP = NumberFormat.getCurrencyInstance(localeID);
+                                        totalso.setText(formatRP.format(sototal));
+                                        totaldo.setText(formatRP.format(dototal));
 //                                    Log.e("TextView", call.getText().toString()+"  "+ec.getText().toString()+"  "+totalso.getText().toString()+"  "+totaldo.getText().toString());
-                                    constraintLayout.setVisibility(View.VISIBLE);
+                                        constraintLayout.setVisibility(View.VISIBLE);
 //                                    Log.e("adapter", ""+listViewAdapter.getItem(i).toString());
-                                    final ListViewAdapter listViewAdapter = new ListViewAdapter(summaries);
-                                    listView.setAdapter(listViewAdapter);
-                                    summaryData.setVisibility(View.VISIBLE);
+                                        final ListViewAdapter listViewAdapter = new ListViewAdapter(summaries);
+                                        listView.setAdapter(listViewAdapter);
+                                        if(summaries.size() == 0){
+                                            listView.setVisibility(View.GONE);
+                                            textSummaryEmpty.setVisibility(View.VISIBLE);
+                                        } else {
+                                            listView.setVisibility(View.VISIBLE);
+                                            textSummaryEmpty.setVisibility(View.INVISIBLE);
+                                        }
+                                        summaryData.setVisibility(View.VISIBLE);
 
-                                } catch (JSONException e) {
-                                    Log.e("CANT PARSE JSON", e.getMessage());
+                                    } catch (JSONException e) {
+                                        Log.e("CANT PARSE JSON", e.getMessage());
 //                                Toast.makeText(getBaseContext(), "GOOD RESPONSE BUT JAVA CAN'T PARSE JSON IT RECEIEVED. " + e.getMessage(), Toast.LENGTH_LONG).show();
-                                } catch (ParseException e) {
-                                    e.printStackTrace();
+                                    } catch (ParseException e) {
+                                        e.printStackTrace();
+                                    }
                                 }
-                            }
 
-                            //ERROR
-                            @Override
-                            public void onError(ANError anError) {
-                                anError.printStackTrace();
-                                Log.e("PARSING ERROR", anError.getResponse() + " Error :" + anError.getMessage() + " - " + anError.getErrorDetail());
+                                //ERROR
+                                @Override
+                                public void onError(ANError anError) {
+                                    anError.printStackTrace();
+                                    Log.e("PARSING ERROR", anError.getResponse() + " Error :" + anError.getMessage() + " - " + anError.getErrorDetail());
 //                            Toast.makeText(getBaseContext(), "UNSUCCESSFUL :  ERROR IS : " + anError.getMessage(), Toast.LENGTH_LONG).show();
-                            }
-                        });
-//                listViewAdapter.notifyDataSetChanged();
+                                }
+                            });
+                }
 
+//                listViewAdapter.notifyDataSetChanged();
             }
         });
     }

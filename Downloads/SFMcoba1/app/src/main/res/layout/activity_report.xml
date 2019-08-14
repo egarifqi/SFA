@@ -461,15 +461,22 @@
         <ListView
             android:id="@+id/mListsummary"
             android:layout_width="match_parent"
-            android:layout_height="250dp"
+            android:layout_height="wrap_content"
             android:layout_marginHorizontal="20dp"
-            android:background="@color/white"
+            android:background="@drawable/rounded_bottom_white"
             />
-        <View
+
+        <TextView
+            android:id="@+id/text_summary_empty"
             android:layout_width="match_parent"
-            android:layout_height="10dp"
+            android:layout_height="wrap_content"
+            android:text="Data tidak ditemukan"
             android:layout_marginHorizontal="20dp"
-            android:background="@drawable/rounded_bottom_white" />
+            android:gravity="center_horizontal"
+            android:padding="10dp"
+            android:textStyle="bold"
+            android:background="@drawable/rounded_bottom_white"
+            android:visibility="invisible"/>
 
     </LinearLayout>
 
