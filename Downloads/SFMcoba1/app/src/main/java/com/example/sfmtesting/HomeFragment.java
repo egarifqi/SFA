@@ -126,7 +126,7 @@ public class HomeFragment extends Fragment {
         StatusSR.ECluarRute = pref.getInt("eclr",com.example.sfmtesting.StatusSR.ECluarRute);
         StatusSR.totalOrder = pref.getInt("ordertotal", StatusSR.totalOrder);
 
-        String login_url = "https://sfa-api.pti-cosmetics.com/v_all_summary?sales_id=eq." + sales_id;
+        String login_url = "https://sfa-api.pti-cosmetics.com/v_all_summary?sales_id=eq." + sales_id+"&&inroute=eq.true";
         AndroidNetworking.get(login_url).setPriority(Priority.HIGH).build().getAsJSONArray(new JSONArrayRequestListener() {
             @Override
             public void onResponse(JSONArray response) {
@@ -179,8 +179,17 @@ public class HomeFragment extends Fragment {
                     } else {
                         progress = 0;
                     }
-                    progressBar.setProgress((int) progress);
+
                     persenTV.setText(progress+"%");
+
+                    if(progress <= 100){
+                        progress = progress/2;
+                    }
+                    else {
+                        progress = progress*3/8;
+                    }
+                    progressBar.setProgress((int) progress);
+
 
                 } catch (JSONException e) {
                     Log.e("CANT PARSE JSON", e.getMessage());

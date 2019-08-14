@@ -43,8 +43,6 @@ public class RingkasanWardahActivity extends AppCompatActivity {
         SharedPreferences pref;
         SharedPreferences.Editor editor;
 
-        androidx.appcompat.widget.Toolbar toolbar = findViewById(R.id.toolbarhistwardah);
-        setSupportActionBar(toolbar);
         //ADD -> NAMA TOKO
         pref = this.getSharedPreferences("TokoPref", 0);
         editor = pref.edit();

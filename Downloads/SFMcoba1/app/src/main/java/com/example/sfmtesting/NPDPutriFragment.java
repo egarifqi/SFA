@@ -35,7 +35,7 @@ import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.common.Priority;
 import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONArrayRequestListener;
-import com.example.sfmtesting.R;
+import com.example.sfmtesting.scan.ScannpdputriActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -79,7 +79,7 @@ public class NPDPutriFragment extends Fragment {
         scannpdputri.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), com.example.sfmtesting.ScannpdputriActivity.class);
+                Intent intent = new Intent(getActivity(), ScannpdputriActivity.class);
                 startActivity(intent);
             }
         });

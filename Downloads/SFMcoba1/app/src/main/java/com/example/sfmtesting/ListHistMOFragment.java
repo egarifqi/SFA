@@ -35,7 +35,7 @@ import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.common.Priority;
 import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONArrayRequestListener;
-import com.example.sfmtesting.R;
+import com.example.sfmtesting.scan.ScanhistmoActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -82,7 +82,7 @@ public class ListHistMOFragment extends Fragment {
         scanhistmo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), com.example.sfmtesting.ScanhistmoActivity.class);
+                Intent intent = new Intent(getActivity(), ScanhistmoActivity.class);
                 startActivity(intent);
             }
         });

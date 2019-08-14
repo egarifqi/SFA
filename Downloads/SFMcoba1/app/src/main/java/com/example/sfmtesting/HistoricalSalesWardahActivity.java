@@ -45,6 +45,7 @@ public class HistoricalSalesWardahActivity extends AppCompatActivity {
         final com.example.sfmtesting.HistoricalSalesWardahPagerAdapter adapter = new com.example.sfmtesting.HistoricalSalesWardahPagerAdapter(getSupportFragmentManager(), tabLayout.getTabCount());
 
         viewPager.setAdapter(adapter);
+        viewPager.setOffscreenPageLimit(5);
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override

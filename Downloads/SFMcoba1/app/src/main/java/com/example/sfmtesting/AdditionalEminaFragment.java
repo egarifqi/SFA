@@ -44,6 +44,8 @@ import org.json.JSONObject;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+import me.xdrop.fuzzywuzzy.FuzzySearch;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -95,9 +97,11 @@ public class AdditionalEminaFragment extends Fragment {
                 for (int i = 0; i < currentList.size(); i++) {
                     spacecraft = currentList.get(i);
 //SEARCH
-                    if (spacecraft.getKodeodoo().toUpperCase().contains(constraint) ||
-                            spacecraft.getNamaproduk().toUpperCase().contains(constraint) ||
-                            spacecraft.getBarcode().toUpperCase().contains(constraint))  {//ADD IF FOUND
+//                    if (spacecraft.getKodeodoo().toUpperCase().contains(constraint) ||
+//                            spacecraft.getNamaproduk().toUpperCase().contains(constraint) ||
+//                            spacecraft.getBarcode().toUpperCase().contains(constraint))  {
+                    if (spacecraft.getFuzzyMatchStatus().toUpperCase().contains(constraint)){
+                        //ADD IF FOUND
                         foundFilters.add(spacecraft);
                     }
                 }
@@ -299,19 +303,19 @@ public class AdditionalEminaFragment extends Fragment {
                                     Log.e("ID", ""+produk.getId()+", Kode: "+produk.getKodeodoo()+", ");
 //                                    if ((produk.getBrand().equals("brand:Emina")) && (produk.getPartner_id().equals(partnerid))){
 
-                                        Log.e("MHS OFFLINE", "EMINA");
-                                        EBP = new com.example.sfmtesting.Spacecraft();
-                                        EBP.setId(produk.getId());
-                                        EBP.setKodeodoo(produk.getKodeodoo());
-                                        EBP.setNamaproduk(produk.getNamaproduk());
-                                        EBP.setCategory(produk.getCategory());
-                                        EBP.setPrice(produk.getPrice());
-                                        EBP.setBarcode(produk.getBarcode());
-                                        EBP.setWeeklySales(produk.getWeeklySales());
-                                        EBP.setStock(produk.getStock());
-                                        EBP.setQty(produk.getQty());
-                                        EBP.setKoli(produk.getKoli());
-                                        downloadedData.add(EBP);
+                                    Log.e("MHS OFFLINE", "EMINA");
+                                    EBP = new com.example.sfmtesting.Spacecraft();
+                                    EBP.setId(produk.getId());
+                                    EBP.setKodeodoo(produk.getKodeodoo());
+                                    EBP.setNamaproduk(produk.getNamaproduk());
+                                    EBP.setCategory(produk.getCategory());
+                                    EBP.setPrice(produk.getPrice());
+                                    EBP.setBarcode(produk.getBarcode());
+                                    EBP.setWeeklySales(produk.getWeeklySales());
+                                    EBP.setStock(produk.getStock());
+                                    EBP.setQty(produk.getQty());
+                                    EBP.setKoli(produk.getKoli());
+                                    downloadedData.add(EBP);
 
 //                                    if (String.valueOf(produk.getPartner_id()) == partnerid){
 //                                        downloadedData.add(EBP);
@@ -337,19 +341,19 @@ public class AdditionalEminaFragment extends Fragment {
                                 Log.e("ID", ""+produk.getId()+", Kode: "+produk.getKodeodoo()+", ");
 //                                if ((produk.getBrand().equals("brand:Emina")) && (produk.getPartner_id().equals(partnerid))){
 
-                                    Log.e("MHS OFFLINE", "EMINA");
-                                    EBP = new com.example.sfmtesting.Spacecraft();
-                                    EBP.setId(produk.getId());
-                                    EBP.setKodeodoo(produk.getKodeodoo());
-                                    EBP.setNamaproduk(produk.getNamaproduk());
-                                    EBP.setCategory(produk.getCategory());
-                                    EBP.setPrice(produk.getPrice());
-                                    EBP.setBarcode(produk.getBarcode());
-                                    EBP.setWeeklySales(produk.getWeeklySales());
-                                    EBP.setStock(produk.getStock());
-                                    EBP.setQty(produk.getQty());
-                                    EBP.setKoli(produk.getKoli());
-                                    downloadedData.add(EBP);
+                                Log.e("MHS OFFLINE", "EMINA");
+                                EBP = new com.example.sfmtesting.Spacecraft();
+                                EBP.setId(produk.getId());
+                                EBP.setKodeodoo(produk.getKodeodoo());
+                                EBP.setNamaproduk(produk.getNamaproduk());
+                                EBP.setCategory(produk.getCategory());
+                                EBP.setPrice(produk.getPrice());
+                                EBP.setBarcode(produk.getBarcode());
+                                EBP.setWeeklySales(produk.getWeeklySales());
+                                EBP.setStock(produk.getStock());
+                                EBP.setQty(produk.getQty());
+                                EBP.setKoli(produk.getKoli());
+                                downloadedData.add(EBP);
 
 //                                    if (String.valueOf(produk.getPartner_id()) == partnerid){
 //                                        downloadedData.add(EBP);
@@ -381,7 +385,7 @@ public class AdditionalEminaFragment extends Fragment {
         scanmhsemina.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), com.example.sfmtesting.ScanmhseminaActivity.class);
+                Intent intent = new Intent(getActivity(), com.example.sfmtesting.scan.ScanmhseminaActivity.class);
                 startActivity(intent);
             }
         });
@@ -395,13 +399,41 @@ public class AdditionalEminaFragment extends Fragment {
         mySearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String s) {
-                adapter.getFilter().filter(s);
+                for(int i = 0; i < spacecrafts.size(); i++){
+                    Log.d("FUZZY RATIO "+s+" : "+spacecrafts.get(i).getNamaproduk(), ""+ FuzzySearch.partialRatio(s, spacecrafts.get(i).getNamaproduk()));
+                    if(s.length() == 0){
+                        spacecrafts.get(i).setFuzzyMatchStatus("fuzzymatched");
+                    }
+                    else {
+                        if(FuzzySearch.partialRatio(s.toLowerCase(), spacecrafts.get(i).getNamaproduk().toLowerCase()+" "+spacecrafts.get(i).getKodeodoo()+" "+spacecrafts.get(i).getBarcode()) > 80){
+                            spacecrafts.get(i).setFuzzyMatchStatus("fuzzymatched");
+                        }
+                        else {
+                            spacecrafts.get(i).setFuzzyMatchStatus("fuzzynotmatched");
+                        }
+                    }
+                }
+                adapter.getFilter().filter("fuzzymatched");
                 return false;
             }
 
             @Override
             public boolean onQueryTextChange(String query) {
-                adapter.getFilter().filter(query);
+                for(int i = 0; i < spacecrafts.size(); i++){
+                    Log.d("FUZZY RATIO "+query+" : "+spacecrafts.get(i).getNamaproduk(), ""+ FuzzySearch.partialRatio(query, spacecrafts.get(i).getNamaproduk()));
+                    if(query.length() == 0){
+                        spacecrafts.get(i).setFuzzyMatchStatus("fuzzymatched");
+                    }
+                    else {
+                        if(FuzzySearch.partialRatio(query.toLowerCase(), spacecrafts.get(i).getNamaproduk().toLowerCase()+" "+spacecrafts.get(i).getKodeodoo()+" "+spacecrafts.get(i).getBarcode()) > 80){
+                            spacecrafts.get(i).setFuzzyMatchStatus("fuzzymatched");
+                        }
+                        else {
+                            spacecrafts.get(i).setFuzzyMatchStatus("fuzzynotmatched");
+                        }
+                    }
+                }
+                adapter.getFilter().filter("fuzzymatched");
                 return false;
             }
         });

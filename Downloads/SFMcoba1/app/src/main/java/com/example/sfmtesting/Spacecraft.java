@@ -28,6 +28,7 @@ public class Spacecraft implements Parcelable {
     int weekly_sales;
     String partner_id;
     String brand;
+    String fuzzyMatchStatus;
     /*
     INSTANCE FIELDS
     */
@@ -192,6 +193,10 @@ public class Spacecraft implements Parcelable {
 
     public void setKoli(String koli) { this.koli = koli; }
 
+    public String getFuzzyMatchStatus() {return fuzzyMatchStatus;}
+
+    public void setFuzzyMatchStatus(String fuzzyStatus) {this.fuzzyMatchStatus = fuzzyStatus;}
+
     public void clearAll() {
         this.id = 0;
         this.kodeodoo = "";
@@ -206,6 +211,7 @@ public class Spacecraft implements Parcelable {
         this.stock = "0";
         this.qty = "0";
         this.koli = "0";
+        this.fuzzyMatchStatus = "fuzzynotmatched";
     }
 
         /*
