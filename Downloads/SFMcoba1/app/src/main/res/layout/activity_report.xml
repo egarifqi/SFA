@@ -69,6 +69,7 @@
                 android:layout_marginLeft="10dp"
                 android:fontFamily="@font/expressway_rg"
                 android:textAlignment="center"
+                android:focusableInTouchMode="false"
                 android:hint="Pilih tanggal awal" />
 
             <TextView
@@ -88,6 +89,7 @@
                 android:layout_marginLeft="@dimen/activity_horizontal_margin"
                 android:layout_marginRight="@dimen/activity_horizontal_margin"
                 android:fontFamily="@font/expressway_rg"
+                android:focusableInTouchMode="false"
                 android:hint="Pilih tanggal akhir"
                 android:textAlignment="center"/>
 
