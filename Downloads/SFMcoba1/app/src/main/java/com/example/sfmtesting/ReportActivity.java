@@ -67,6 +67,7 @@ public class ReportActivity extends AppCompatActivity {
     EditText dateOfBirthET;
     EditText endDateET;
     TextView textSummaryEmpty;
+    LinearLayout layoutSummaryEmpty;
     String selectedDate;
     String selectedEndDate;
     LinearLayout summaryData;
@@ -103,6 +104,7 @@ public class ReportActivity extends AppCompatActivity {
         dateOfBirthET = findViewById(R.id.tv);
         endDateET = findViewById(R.id.tv2);
         textSummaryEmpty = findViewById(R.id.text_summary_empty);
+        layoutSummaryEmpty = findViewById(R.id.layout_summary_empty);
 
         final ConstraintLayout constraintLayout = findViewById(R.id.header_summary);
 
@@ -291,13 +293,12 @@ public class ReportActivity extends AppCompatActivity {
                                         final ListViewAdapter listViewAdapter = new ListViewAdapter(summaries);
                                         listView.setAdapter(listViewAdapter);
                                         if(summaries.size() == 0){
-                                            listView.setVisibility(View.GONE);
-                                            textSummaryEmpty.setVisibility(View.VISIBLE);
+                                            layoutSummaryEmpty.setVisibility(View.VISIBLE);
+                                            summaryData.setVisibility(View.GONE);
                                         } else {
-                                            listView.setVisibility(View.VISIBLE);
-                                            textSummaryEmpty.setVisibility(View.INVISIBLE);
+                                            layoutSummaryEmpty.setVisibility(View.GONE);
+                                            summaryData.setVisibility(View.VISIBLE);
                                         }
-                                        summaryData.setVisibility(View.VISIBLE);
 
                                     } catch (JSONException e) {
                                         Log.e("CANT PARSE JSON", e.getMessage());
