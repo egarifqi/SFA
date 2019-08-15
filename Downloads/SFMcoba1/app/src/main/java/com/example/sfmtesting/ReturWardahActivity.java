@@ -11,8 +11,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -34,6 +32,7 @@ import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.common.Priority;
 import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONArrayRequestListener;
+import com.example.sfmtesting.scan.ScanreturwardahActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -119,7 +118,7 @@ public class ReturWardahActivity extends AppCompatActivity {
                 View dialogView = layoutInflater.inflate(R.layout.form_retur, null);
                 dialog.setView(dialogView);
                 dialog.setCancelable(true);
-                dialog.setTitle("Input Order");
+                dialog.setTitle("Input Retur");
 
                 TextView formKode = null;
                 final TextView formNama;
@@ -130,7 +129,7 @@ public class ReturWardahActivity extends AppCompatActivity {
                 formKode = dialogView.findViewById(R.id.kode_odoo_form);
                 formNama = dialogView.findViewById(R.id.nama_produk_form);
                 formHarga = dialogView.findViewById(R.id.harga_form);
-                formQty = dialogView.findViewById(R.id.qty_form);
+                formQty = dialogView.findViewById(R.id.qty_form1);
                 formPcs = dialogView.findViewById(R.id.pcs_produk_form);
 
                 final Spacecraft coba = (Spacecraft) adapter.getItem(position);

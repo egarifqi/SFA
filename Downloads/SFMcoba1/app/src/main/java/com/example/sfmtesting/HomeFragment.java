@@ -126,7 +126,7 @@ public class HomeFragment extends Fragment {
         StatusSR.ECluarRute = pref.getInt("eclr",com.example.sfmtesting.StatusSR.ECluarRute);
         StatusSR.totalOrder = pref.getInt("ordertotal", StatusSR.totalOrder);
 
-        String login_url = "https://sfa-api.pti-cosmetics.com/v_all_summary?sales_id=eq." + sales_id;
+        String login_url = "https://sfa-api.pti-cosmetics.com/v_all_summary?sales_id=eq." + sales_id+"&&inroute=eq.true";
         AndroidNetworking.get(login_url).setPriority(Priority.HIGH).build().getAsJSONArray(new JSONArrayRequestListener() {
             @Override
             public void onResponse(JSONArray response) {

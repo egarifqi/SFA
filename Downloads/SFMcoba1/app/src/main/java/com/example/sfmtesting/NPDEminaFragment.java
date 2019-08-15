@@ -35,7 +35,7 @@ import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.common.Priority;
 import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONArrayRequestListener;
-import com.example.sfmtesting.R;
+import com.example.sfmtesting.scan.ScannpdeminaActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -82,7 +82,7 @@ public class NPDEminaFragment extends Fragment {
         scannpdemina.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), com.example.sfmtesting.ScannpdeminaActivity.class);
+                Intent intent = new Intent(getActivity(), ScannpdeminaActivity.class);
                 startActivity(intent);
             }
         });

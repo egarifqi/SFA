@@ -35,7 +35,7 @@ import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.common.Priority;
 import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONArrayRequestListener;
-import com.example.sfmtesting.R;
+import com.example.sfmtesting.scan.ScannpdwardahActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -82,7 +82,7 @@ public class NPDWardahFragment extends Fragment {
         scannpdwardah.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), com.example.sfmtesting.ScannpdwardahActivity.class);
+                Intent intent = new Intent(getActivity(), ScannpdwardahActivity.class);
                 startActivity(intent);
             }
         });

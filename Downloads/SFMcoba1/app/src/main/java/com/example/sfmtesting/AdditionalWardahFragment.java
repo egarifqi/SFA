@@ -36,6 +36,7 @@ import com.androidnetworking.common.Priority;
 import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONArrayRequestListener;
 import com.example.sfmtesting.R;
+import com.example.sfmtesting.scan.ScanmhswardahActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -81,7 +82,7 @@ public class AdditionalWardahFragment extends Fragment {
         scanmhswardah.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), com.example.sfmtesting.ScanmhswardahActivity.class);
+                Intent intent = new Intent(getActivity(), ScanmhswardahActivity.class);
                 startActivity(intent);
             }
         });
@@ -101,7 +102,11 @@ public class AdditionalWardahFragment extends Fragment {
                         spacecrafts.get(i).setFuzzyMatchStatus("fuzzymatched");
                     }
                     else {
+<<<<<<< HEAD
                         if(FuzzySearch.partialRatio(s.toLowerCase(), spacecrafts.get(i).getNamaproduk().toLowerCase()+" "+spacecrafts.get(i).getKodeodoo()+" "+spacecrafts.get(i).getBarcode()) > fuzzyscore){
+=======
+                        if(FuzzySearch.partialRatio(s.toLowerCase(), spacecrafts.get(i).getNamaproduk().toLowerCase()+" "+spacecrafts.get(i).getKodeodoo()+" "+spacecrafts.get(i).getBarcode()) > 80){
+>>>>>>> 9ff1f7c3e3776a202a0a184941696879778e55ec
                             spacecrafts.get(i).setFuzzyMatchStatus("fuzzymatched");
                         }
                         else {
@@ -121,7 +126,11 @@ public class AdditionalWardahFragment extends Fragment {
                         spacecrafts.get(i).setFuzzyMatchStatus("fuzzymatched");
                     }
                     else {
+<<<<<<< HEAD
                         if(FuzzySearch.partialRatio(query.toLowerCase(), spacecrafts.get(i).getNamaproduk().toLowerCase()+" "+spacecrafts.get(i).getKodeodoo()+" "+spacecrafts.get(i).getBarcode()) > fuzzyscore){
+=======
+                        if(FuzzySearch.partialRatio(query.toLowerCase(), spacecrafts.get(i).getNamaproduk().toLowerCase()+" "+spacecrafts.get(i).getKodeodoo()+" "+spacecrafts.get(i).getBarcode()) > 80){
+>>>>>>> 9ff1f7c3e3776a202a0a184941696879778e55ec
                             spacecrafts.get(i).setFuzzyMatchStatus("fuzzymatched");
                         }
                         else {

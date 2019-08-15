@@ -62,7 +62,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginEnd="8dp"
-                    android:text="Order"
+                    android:text="RETUR"
                     app:layout_constraintEnd_toEndOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -131,36 +131,6 @@
                 android:textColor="@color/white"
                 android:textSize="14dp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/header_koli"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.647" />
-
-            <TextView
-                android:id="@+id/header_koli"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="4dp"
-                android:ems="2"
-                android:gravity="center"
-                android:text="W.S"
-                android:textColor="@color/white"
-                android:textSize="14dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/header_stock"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.647" />
-
-            <TextView
-                android:id="@+id/header_stock"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="4dp"
-                android:ems="3"
-                android:gravity="center"
-                android:text="Stock"
-                android:textColor="@color/white"
-                android:textSize="14dp"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/header_order"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.647" />
@@ -172,7 +142,7 @@
                 android:layout_marginBottom="4dp"
                 android:ems="4"
                 android:gravity="center"
-                android:text="Order"
+                android:text="Qty"
                 android:textColor="@color/white"
                 android:textSize="14dp"
                 app:layout_constraintBottom_toBottomOf="parent"

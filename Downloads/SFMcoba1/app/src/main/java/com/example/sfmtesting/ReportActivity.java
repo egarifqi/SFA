@@ -62,7 +62,7 @@ public class ReportActivity extends AppCompatActivity {
     ArrayList<Integer> eclist = new ArrayList<Integer>();
     ArrayList<Date> orderdate = new ArrayList<Date>();
     ArrayList<Boolean> routelist = new ArrayList<Boolean>();
-//    @BindView(R.id.img_profile)
+    //    @BindView(R.id.img_profile)
     ImageView imgProfile;
     EditText dateOfBirthET;
     EditText endDateET;

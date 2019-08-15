@@ -62,7 +62,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginEnd="8dp"
-                    android:text="Order"
+                    android:text="retur"
                     app:layout_constraintEnd_toEndOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -142,7 +142,7 @@
                 android:layout_marginBottom="4dp"
                 android:ems="4"
                 android:gravity="center"
-                android:text="Retur"
+                android:text="Qty"
                 android:textColor="@color/white"
                 android:textSize="14dp"
                 app:layout_constraintBottom_toBottomOf="parent"
