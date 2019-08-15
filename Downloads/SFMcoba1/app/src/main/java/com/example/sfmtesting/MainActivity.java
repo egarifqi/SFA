@@ -23,6 +23,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.telephony.TelephonyManager;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -61,6 +62,10 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
     SharedPreferences pref;
     SharedPreferences.Editor editor;
     String postUrl;
+    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    Calendar[] calendar = {Calendar.getInstance()};
+    String currentTime = simpleDateFormat.format(calendar[0].getTime());
+    StringBuffer sb = new StringBuffer();
 
     ArrayList<String> username = new ArrayList<String>();
     ArrayList<String> password = new ArrayList<String>();
@@ -127,13 +132,18 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
 
         getLocation();
 
-        final Calendar[] calendar = {Calendar.getInstance()};
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        final String currentTime = simpleDateFormat.format(calendar[0].getTime());
-
         mEmailView = findViewById(R.id.username);
         mPasswordView = findViewById(R.id.password);
-        final StringBuffer sb = new StringBuffer();
+
+        mPasswordView.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View view, int i, KeyEvent keyEvent) {
+                if ((keyEvent.getAction() == KeyEvent.ACTION_DOWN) && (i == KeyEvent.KEYCODE_ENTER)){
+                    login();
+                }
+                return false;
+            }
+        });
 
         pref = getApplicationContext().getSharedPreferences("MyPref", 0);
         editor = pref.edit();
@@ -184,185 +194,189 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         loginbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-                NetworkInfo netInfo = cm.getActiveNetworkInfo();
-                if (netInfo != null && netInfo.isConnected()) {
+                login();
+            }
+        });
+    }
 
-                    boolean cek = false;
+    public void login(){
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo netInfo = cm.getActiveNetworkInfo();
+        if (netInfo != null && netInfo.isConnected()) {
 
-                    if(netInfo.getType() == ConnectivityManager.TYPE_WIFI) {
-                        WifiManager wifiManager = (WifiManager) getSystemService(Context.WIFI_SERVICE);
-                        int numberOfLevels = 5;
-                        WifiInfo wifiInfo = wifiManager.getConnectionInfo();
-                        int level = WifiManager.calculateSignalLevel(wifiInfo.getRssi(), numberOfLevels);
-                        if (level == 2) {
-                            cek = false;
-                        } else if (level == 3) {
-                            cek = true;
-                        } else if (level == 4) {
-                            cek = true;
-                        } else if(level == 5 ) {
-                            cek = true;
-                        }else {
-                            cek = false;
-                        }
-                    }else if(netInfo.getType() == ConnectivityManager.TYPE_MOBILE) {
-                        int networkClass = getNetworkClass(getNetworkType(MainActivity.this));
-                        if(networkClass == 1)
-                            cek = false;
-                        else if(networkClass == 2 )
-                            cek = true;
-                        else if(networkClass == 3 )
-                            cek = true;
-                        else
-                            cek = true;
-                    }else
-                        cek = false;
+            boolean cek = false;
 
-                    if (cek) {
-                        calendar[0] = Calendar.getInstance();
-                        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
-                        String date = sdf.format(calendar[0].getTime());
-                        Log.e("MULAI LOGIN", date);
-                        boolean cancel = false;
-                        View focusview = null;
-                        String emailET = mEmailView.getText().toString();
-                        String pwET = mPasswordView.getText().toString();
-                        boolean same = false;
-                        getLocation();
+            if(netInfo.getType() == ConnectivityManager.TYPE_WIFI) {
+                WifiManager wifiManager = (WifiManager) getSystemService(Context.WIFI_SERVICE);
+                int numberOfLevels = 5;
+                WifiInfo wifiInfo = wifiManager.getConnectionInfo();
+                int level = WifiManager.calculateSignalLevel(wifiInfo.getRssi(), numberOfLevels);
+                if (level == 2) {
+                    cek = false;
+                } else if (level == 3) {
+                    cek = true;
+                } else if (level == 4) {
+                    cek = true;
+                } else if(level == 5 ) {
+                    cek = true;
+                }else {
+                    cek = false;
+                }
+            }else if(netInfo.getType() == ConnectivityManager.TYPE_MOBILE) {
+                int networkClass = getNetworkClass(getNetworkType(MainActivity.this));
+                if(networkClass == 1)
+                    cek = false;
+                else if(networkClass == 2 )
+                    cek = true;
+                else if(networkClass == 3 )
+                    cek = true;
+                else
+                    cek = true;
+            }else
+                cek = false;
 
-                        if (emailET.isEmpty()) {
-                            mEmailView.setError("Tolong isi kolom ini");
-                            focusview = mEmailView;
-                            cancel = true;
-                        } else {
-                            if (pwET.isEmpty()) {
-                                mPasswordView.setError("Tolong isi kolom ini");
-                                focusview = mPasswordView;
-                                cancel = true;
-                            } else {
-                                pwET = md5(pwET);
-                            }
-                        }
+            if (cek) {
+                calendar[0] = Calendar.getInstance();
+                SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+                String date = sdf.format(calendar[0].getTime());
+                Log.e("MULAI LOGIN", date);
+                boolean cancel = false;
+                View focusview = null;
+                String emailET = mEmailView.getText().toString();
+                String pwET = mPasswordView.getText().toString();
+                boolean same = false;
+                getLocation();
 
-                        if (cancel) {
-                            focusview.requestFocus();
-                        } else {
-                            for (int j = 0; j < username.size(); j++) {
-                                if (emailET.equals(username.get(j)) && pwET.equals(password.get(j))) {
-                                    same = true;
-                                    salesacc = sales_id.get(j);
-                                    useracc = username.get(j);
-                                    passacc = password.get(j);
-                                    idacc = id.get(j);
-                                    dcacc = dc_id.get(j);
-                                    dcnameacc = dc_name.get(j);
-                                    nameacc = salesname.get(j);
-                                    String latitude = pref.getString("latitude", "0");
-                                    String longitude = pref.getString("longitude", "0");
-                                    editor.putString("sales_id", salesacc);
-                                    editor.putString("username", useracc);
-                                    editor.putString("user_id", idacc);
-                                    editor.putString("dc_id", dcacc);
-                                    editor.putString("dc_name", dcnameacc);
-                                    editor.putString("sales_name", nameacc);
-                                    editor.commit();
-                                    final String salesidacc = pref.getString("sales_id", "");
-                                    com.example.sfmtesting.StatusSR.namaSR = nameacc;
-                                    com.example.sfmtesting.StatusSR.idSR = salesacc;
+                if (emailET.isEmpty()) {
+                    mEmailView.setError("Tolong isi kolom ini");
+                    focusview = mEmailView;
+                    cancel = true;
+                } else {
+                    if (pwET.isEmpty()) {
+                        mPasswordView.setError("Tolong isi kolom ini");
+                        focusview = mPasswordView;
+                        cancel = true;
+                    } else {
+                        pwET = md5(pwET);
+                    }
+                }
+
+                if (cancel) {
+                    focusview.requestFocus();
+                } else {
+                    for (int j = 0; j < username.size(); j++) {
+                        if (emailET.equals(username.get(j)) && pwET.equals(password.get(j))) {
+                            same = true;
+                            salesacc = sales_id.get(j);
+                            useracc = username.get(j);
+                            passacc = password.get(j);
+                            idacc = id.get(j);
+                            dcacc = dc_id.get(j);
+                            dcnameacc = dc_name.get(j);
+                            nameacc = salesname.get(j);
+                            String latitude = pref.getString("latitude", "0");
+                            String longitude = pref.getString("longitude", "0");
+                            editor.putString("sales_id", salesacc);
+                            editor.putString("username", useracc);
+                            editor.putString("user_id", idacc);
+                            editor.putString("dc_id", dcacc);
+                            editor.putString("dc_name", dcnameacc);
+                            editor.putString("sales_name", nameacc);
+                            editor.commit();
+                            final String salesidacc = pref.getString("sales_id", "");
+                            com.example.sfmtesting.StatusSR.namaSR = nameacc;
+                            com.example.sfmtesting.StatusSR.idSR = salesacc;
 //                            Toast.makeText(getBaseContext(), "sales id" + salesidacc, Toast.LENGTH_LONG).show();
-                                    Log.e("salesnya ya", salesidacc);
+                            Log.e("salesnya ya", salesidacc);
 
-                                    int SDK_INT = android.os.Build.VERSION.SDK_INT;
-                                    if (SDK_INT > 8) {
-                                        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
-                                                .permitAll().build();
-                                        StrictMode.setThreadPolicy(policy);
-                                        //your codes here
+                            int SDK_INT = android.os.Build.VERSION.SDK_INT;
+                            if (SDK_INT > 8) {
+                                StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
+                                        .permitAll().build();
+                                StrictMode.setThreadPolicy(policy);
+                                //your codes here
 
-                                        try {
-                                            URL url = new URL("http://10.3.181.177:3000/login_presence");
-                                            JSONObject obj = new JSONObject();
-                                            obj.put("user_id", idacc);
-                                            obj.put("username", useracc);
-                                            obj.put("latitude", latitude);
-                                            obj.put("langitude", longitude);
-                                            obj.put("login_date", currentTime);
-                                            Log.e("Bentuk JSON1", obj.toString());
-                                            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-                                            conn.setReadTimeout(15000);
-                                            conn.setConnectTimeout(15000);
-                                            conn.setRequestMethod("POST");
-                                            conn.setDoOutput(true);
-                                            conn.setDoInput(true);
-                                            OutputStream os = conn.getOutputStream();
-                                            BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(os, StandardCharsets.UTF_8));
-                                            writer.write(getPostDataString(obj));
-                                            writer.flush();
-                                            writer.close();
-                                            os.close();
+                                try {
+                                    URL url = new URL("http://10.3.181.177:3000/login_presence");
+                                    JSONObject obj = new JSONObject();
+                                    obj.put("user_id", idacc);
+                                    obj.put("username", useracc);
+                                    obj.put("latitude", latitude);
+                                    obj.put("langitude", longitude);
+                                    obj.put("login_date", currentTime);
+                                    Log.e("Bentuk JSON1", obj.toString());
+                                    HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                                    conn.setReadTimeout(15000);
+                                    conn.setConnectTimeout(15000);
+                                    conn.setRequestMethod("POST");
+                                    conn.setDoOutput(true);
+                                    conn.setDoInput(true);
+                                    OutputStream os = conn.getOutputStream();
+                                    BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(os, StandardCharsets.UTF_8));
+                                    writer.write(getPostDataString(obj));
+                                    writer.flush();
+                                    writer.close();
+                                    os.close();
 //                                        Log.e("Bentuk JSON2", obj.toString());
 
-                                            int responseCode = conn.getResponseCode();
-                                            if (responseCode == HttpURLConnection.HTTP_OK) {
+                                    int responseCode = conn.getResponseCode();
+                                    if (responseCode == HttpURLConnection.HTTP_OK) {
 //                                            Log.e("Bentuk JSON2.5", obj.toString());
-                                                BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-                                                String line = "";
-                                                while ((line = in.readLine()) != null) {
-                                                    sb.append(line);
-                                                    break;
-                                                }
-                                                in.close();
+                                        BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+                                        String line = "";
+                                        while ((line = in.readLine()) != null) {
+                                            sb.append(line);
+                                            break;
+                                        }
+                                        in.close();
 //                                            Log.e("Bentuk JSON3", obj.toString());
-                                                Log.e("Buffer", sb.toString());
+                                        Log.e("Buffer", sb.toString());
 
-                                            } else {
-                                                Log.e("Response_Code", String.valueOf(responseCode));
-                                                Log.e("Response_Message", String.valueOf(conn.getResponseMessage()));
-                                                Log.e("Returned_String", sb.toString());
+                                    } else {
+                                        Log.e("Response_Code", String.valueOf(responseCode));
+                                        Log.e("Response_Message", String.valueOf(conn.getResponseMessage()));
+                                        Log.e("Returned_String", sb.toString());
 //                                            Log.e("Bentuk JSON4", obj.toString());
 
-                                            }
-                                        } catch (Exception e) {
-                                            e.printStackTrace();
-                                            Log.e("Error", "Connection Error : " + e.getMessage());
-
-                                        }
-
                                     }
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                    Log.e("Error", "Connection Error : " + e.getMessage());
 
-                                    AmbilData ambilData = new AmbilData();
-                                    ambilData.execute();
-
-
-                                } else {
-//                            Toast.makeText(getBaseContext(), "Username belum terdaftar", Toast.LENGTH_SHORT).show();
                                 }
+
                             }
-                            Log.e("sales id", salesacc + "username" + useracc + "password" + passacc + "dc id" + dcacc);
+
+                            AmbilData ambilData = new AmbilData();
+                            ambilData.execute();
+
+
+                        } else {
+//                            Toast.makeText(getBaseContext(), "Username belum terdaftar", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                    Log.e("sales id", salesacc + "username" + useracc + "password" + passacc + "dc id" + dcacc);
 
 //                    Toast.makeText(getBaseContext(), "Sales id :" + salesacc + "\n" +
 //                            "Username :" + useracc + "\n" +
 //                            "Password :" + passacc + "\n" +
 //                            "Email :" + emailacc, Toast.LENGTH_LONG).show();
-                        }
-                    } else {
-                        AlertDialog.Builder dialog = new AlertDialog.Builder(MainActivity.this);
-                        dialog.setTitle("Gagal Log In");
-                        dialog.setMessage("Koneksi internet terdeteksi namun tidak memadai untuk mengambil data harian...\n Pastikan anda terhubung dengan koneksi internet yang kencang...");
-                        dialog.setCancelable(true);
-                        dialog.show();
-                    }
-
-                } else {
-                    AlertDialog.Builder dialog = new AlertDialog.Builder(MainActivity.this);
-                    dialog.setTitle("Gagal Log In");
-                    dialog.setMessage("Tidak ada koneksi internet...\nPastikan anda terhubung dengan jaringan internet...");
-                    dialog.setCancelable(true);
-                    dialog.show();
                 }
+            } else {
+                AlertDialog.Builder dialog = new AlertDialog.Builder(MainActivity.this);
+                dialog.setTitle("Gagal Log In");
+                dialog.setMessage("Koneksi internet terdeteksi namun tidak memadai untuk mengambil data harian...\n Pastikan anda terhubung dengan koneksi internet yang kencang...");
+                dialog.setCancelable(true);
+                dialog.show();
             }
-        });
+
+        } else {
+            AlertDialog.Builder dialog = new AlertDialog.Builder(MainActivity.this);
+            dialog.setTitle("Gagal Log In");
+            dialog.setMessage("Tidak ada koneksi internet...\nPastikan anda terhubung dengan jaringan internet...");
+            dialog.setCancelable(true);
+            dialog.show();
+        }
     }
 
     @Override

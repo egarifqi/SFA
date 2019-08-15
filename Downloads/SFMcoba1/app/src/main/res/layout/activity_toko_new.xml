@@ -143,7 +143,7 @@
 
             <!--Tombol 4-->
             <LinearLayout
-                android:id="@+id/pengajuan"
+                android:id="@+id/kondisitoko"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -160,7 +160,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Pengajuan"
+                    android:text="Kondisi Toko"
                     android:textColor="#172646"
                     android:textSize="16sp" />
 

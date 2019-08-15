@@ -316,16 +316,16 @@ public class TokoActivity extends AppCompatActivity {
         LinearLayout visit = findViewById(R.id.takingorder);
         LinearLayout retur = findViewById(R.id.retur);
         LinearLayout delivery = findViewById(R.id.delivery);
-        LinearLayout pengajuan = findViewById(R.id.pengajuan);
+        LinearLayout pengajuan = findViewById(R.id.kondisitoko);
         Button selesai = findViewById(R.id.button_simpantoko);
         final TextView headertoko = findViewById(R.id.nameToko);
         final TextView notelp = findViewById(R.id.noTelp);
         TextView nohp = findViewById(R.id.noHP);
         final TextView channel = findViewById(R.id.channel);
-        final TextView storetype = findViewById(R.id.tipeoutlet);
+//        final TextView storetype = findViewById(R.id.tipeoutlet);
         final TextView frekuensi = findViewById(R.id.frekuensi);
-        TextView program = findViewById(R.id.program);
-        TextView brand = findViewById(R.id.brand);
+//        TextView program = findViewById(R.id.program);
+//        TextView brand = findViewById(R.id.brand);
 
         final ListView listprogram = findViewById(R.id.listprogram);
         final ListViewAdapter[] adapter = new ListViewAdapter[1];
