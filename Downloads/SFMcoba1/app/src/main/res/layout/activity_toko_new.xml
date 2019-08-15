@@ -37,9 +37,10 @@
     <LinearLayout
         android:id="@+id/linearLayout4"
         android:layout_width="match_parent"
-        android:layout_height="192dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="50dp"
+        android:paddingBottom="30dp"
         android:layout_marginEnd="20dp"
         android:background="@drawable/bgmenus"
         android:orientation="vertical"
@@ -62,14 +63,14 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="horizontal"
             android:weightSum="4">
 
             <!--Tombol 1-->
             <LinearLayout
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
                 android:id="@+id/takingorder"
@@ -154,7 +155,6 @@
                     android:layout_width="60dp"
                     android:layout_height="60dp"
                     android:layout_marginBottom="8dp"
-                    android:clickable="true"
                     android:src="@drawable/help" />
 
                 <TextView
@@ -177,7 +177,6 @@
         android:id="@+id/ket"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
         android:orientation="horizontal"
         android:weightSum="2"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout4"
@@ -187,8 +186,7 @@
             android:id="@+id/ket1"
             android:layout_width="30dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="14dp"
-            android:layout_marginTop="5dp"
+            android:layout_marginStart="20dp"
             android:layout_marginEnd="5dp"
             android:layout_weight="1"
             android:background="@drawable/gradient1"
@@ -204,7 +202,7 @@
                 android:ems="7"
                 android:text="Alamat"
                 android:textColor="@color/text"
-                android:textSize="18sp" />
+                android:textSize="12sp" />
 
             <TextView
                 android:id="@+id/alamatToko"
@@ -213,7 +211,7 @@
                 android:layout_marginStart="8dp"
                 android:ems="19"
                 android:textColor="@color/text"
-                android:textSize="18sp" />
+                android:textSize="12sp" />
 
             <TextView
                 android:id="@+id/noTelpTitle"
@@ -225,7 +223,7 @@
                 android:ems="7"
                 android:text="Nomor Telp / HP"
                 android:textColor="@color/text"
-                android:textSize="18sp" />
+                android:textSize="12sp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -238,7 +236,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:textColor="@color/text"
-                    android:textSize="18sp" />
+                    android:textSize="12sp" />
 
                 <TextView
                     android:id="@+id/noHP"
@@ -246,7 +244,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:textColor="@color/text"
-                    android:textSize="18sp" />
+                    android:textSize="12sp" />
             </LinearLayout>
 
 
@@ -287,8 +285,7 @@
             android:layout_width="30dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginEnd="14dp"
+            android:layout_marginEnd="20dp"
             android:layout_weight="1"
             android:background="@drawable/gradient_emina"
             android:orientation="vertical">
@@ -303,7 +300,7 @@
                 android:ems="8"
                 android:text="Type Outlet"
                 android:textColor="@color/text"
-                android:textSize="18sp" />
+                android:textSize="12sp" />
 
             <TextView
                 android:id="@+id/channel"
@@ -312,7 +309,7 @@
                 android:layout_marginStart="8dp"
                 android:ems="19"
                 android:textColor="@color/text"
-                android:textSize="18sp" />
+                android:textSize="12sp" />
 
             <TextView
                 android:id="@+id/frekuensiTitle"
@@ -321,10 +318,10 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="24dp"
                 android:layout_marginEnd="8dp"
-                android:ems="8"
+                android:ems="10"
                 android:text="Frekuensi Kunjungan"
                 android:textColor="@color/text"
-                android:textSize="18sp" />
+                android:textSize="12sp" />
 
             <TextView
                 android:id="@+id/frekuensi"
@@ -334,30 +331,31 @@
                 android:layout_marginBottom="24dp"
                 android:ems="19"
                 android:textColor="@color/text"
-                android:textSize="18sp" />
+                android:textSize="12sp" />
 
         </LinearLayout>
 
     </LinearLayout>
     <!--ScrollView Dashboard -->
-    <ScrollView
+    <LinearLayout
         android:id="@+id/scrollView2"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_marginHorizontal="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/ket">
+        app:layout_constraintTop_toBottomOf="@id/ket"
+        android:orientation="vertical">
 
         <!--Grid-->
         <GridLayout
             android:id="@+id/mainGrid"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="8"
             android:alignmentMode="alignMargins"
             android:columnCount="1"
             android:columnOrderPreserved="false"
             android:padding="14dp"
-            android:rowCount="3">
+            android:rowCount="1">
 
             <!--PROGRAM-->
             <LinearLayout
@@ -373,7 +371,7 @@
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="24dp"
                     android:layout_marginEnd="8dp"
-                    android:ems="8"
+                    android:ems="6"
                     android:text="Program Diikuti"
                     android:textColor="@color/text"
                     android:textSize="18sp" />
@@ -401,38 +399,38 @@
 
         </GridLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="8dp"
+            android:gravity="center"
+            android:orientation="horizontal">
 
-    </ScrollView>
+            <Button
+                android:id="@+id/button_tundatoko"
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:layout_gravity="center"
+                android:layout_marginRight="3dp"
+                android:background="#818181"
+                android:text="TUNDA"
+                android:textColor="#fff" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:layout_marginBottom="8dp"
-        android:gravity="center"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="@+id/scrollView2">
+            <Button
+                android:id="@+id/button_simpantoko"
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="3dp"
+                android:background="#818181"
+                android:text="selesai"
+                android:textColor="#fff" />
 
-        <Button
-            android:id="@+id/button_tundatoko"
-            android:layout_width="wrap_content"
-            android:layout_height="35dp"
-            android:layout_gravity="center"
-            android:layout_marginRight="3dp"
-            android:background="#818181"
-            android:text="TUNDA"
-            android:textColor="#fff" />
+        </LinearLayout>
 
-        <Button
-            android:id="@+id/button_simpantoko"
-            android:layout_width="wrap_content"
-            android:layout_height="35dp"
-            android:layout_gravity="center"
-            android:layout_marginLeft="3dp"
-            android:background="#818181"
-            android:text="selesai"
-            android:textColor="#fff" />
 
     </LinearLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

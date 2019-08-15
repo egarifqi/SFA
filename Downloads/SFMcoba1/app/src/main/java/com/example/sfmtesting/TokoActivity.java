@@ -316,7 +316,7 @@ public class TokoActivity extends AppCompatActivity {
         LinearLayout visit = findViewById(R.id.takingorder);
         LinearLayout retur = findViewById(R.id.retur);
         LinearLayout delivery = findViewById(R.id.delivery);
-        LinearLayout pengajuan = findViewById(R.id.kondisitoko);
+        LinearLayout kondisitoko = findViewById(R.id.kondisitoko);
         Button selesai = findViewById(R.id.button_simpantoko);
         final TextView headertoko = findViewById(R.id.nameToko);
         final TextView notelp = findViewById(R.id.noTelp);
@@ -334,6 +334,7 @@ public class TokoActivity extends AppCompatActivity {
         final ArrayList<Program> programs = new ArrayList<>();
 
         Button tunda = findViewById(R.id.button_tundatoko);
+
         selesai.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -567,11 +568,11 @@ public class TokoActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        pengajuan.setOnClickListener(new View.OnClickListener() {
+        kondisitoko.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Intent intent = new Intent(TokoActivity.this, HistoricalSalesEminaActivity.class);
-//                startActivity(intent);
+                Intent intent = new Intent(TokoActivity.this, KondisiTokoActivity.class);
+                startActivity(intent);
             }
         });
 
