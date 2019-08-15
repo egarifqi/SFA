@@ -60,6 +60,7 @@ public class ListHistEminaFragment extends Fragment {
     ImageView scanhistemina;
     final com.example.sfmtesting.Spacecraft kumpulanorder = new com.example.sfmtesting.Spacecraft();
     final ArrayList<com.example.sfmtesting.Spacecraft> order = new ArrayList<com.example.sfmtesting.Spacecraft>();
+    int fuzzyscore = 75;
 
     final ArrayList<Integer> orderedID = new ArrayList<Integer>();
     final ArrayList<String> orderedkode = new ArrayList<String>(); //kodemo
@@ -408,7 +409,7 @@ public class ListHistEminaFragment extends Fragment {
                         spacecrafts.get(i).setFuzzyMatchStatus("fuzzymatched");
                     }
                     else {
-                        if(FuzzySearch.partialRatio(s.toLowerCase(), spacecrafts.get(i).getNamaproduk().toLowerCase()+" "+spacecrafts.get(i).getKodeodoo()+" "+spacecrafts.get(i).getBarcode()) > 80){
+                        if(FuzzySearch.partialRatio(s.toLowerCase(), spacecrafts.get(i).getNamaproduk().toLowerCase()+" "+spacecrafts.get(i).getKodeodoo()+" "+spacecrafts.get(i).getBarcode()) > fuzzyscore){
                             spacecrafts.get(i).setFuzzyMatchStatus("fuzzymatched");
                         }
                         else {
@@ -428,7 +429,7 @@ public class ListHistEminaFragment extends Fragment {
                         spacecrafts.get(i).setFuzzyMatchStatus("fuzzymatched");
                     }
                     else {
-                        if(FuzzySearch.partialRatio(query.toLowerCase(), spacecrafts.get(i).getNamaproduk().toLowerCase()+" "+spacecrafts.get(i).getKodeodoo()+" "+spacecrafts.get(i).getBarcode()) > 80){
+                        if(FuzzySearch.partialRatio(query.toLowerCase(), spacecrafts.get(i).getNamaproduk().toLowerCase()+" "+spacecrafts.get(i).getKodeodoo()+" "+spacecrafts.get(i).getBarcode()) > fuzzyscore){
                             spacecrafts.get(i).setFuzzyMatchStatus("fuzzymatched");
                         }
                         else {

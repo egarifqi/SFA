@@ -68,6 +68,7 @@ public class OthersWardahFragment extends Fragment {
     ListViewAdapter adapter;
     private ArrayList<String> stock1 = new ArrayList<String>();
     private ArrayList<String> qty1 = new ArrayList<String>();
+    int fuzzyscore = 75;
 
     @Override
 
@@ -94,12 +95,12 @@ public class OthersWardahFragment extends Fragment {
             @Override
             public boolean onQueryTextSubmit(String s) {
                 for(int i = 0; i < spacecrafts.size(); i++){
-                    Log.d("FUZZY RATIO "+s+" LENGTH("+s.length()+") : "+spacecrafts.get(i).getNamaproduk(), ""+ FuzzySearch.partialRatio(s, spacecrafts.get(i).getNamaproduk()));
+                    Log.d("FUZZY RATIO "+s+" LENGTH("+s.length()+") : "+spacecrafts.get(i).getNamaproduk()+" "+spacecrafts.get(i).getKodeodoo()+" "+spacecrafts.get(i).getBarcode(), ""+ FuzzySearch.partialRatio(s, spacecrafts.get(i).getNamaproduk()));
                     if(s.length() == 0){
                         spacecrafts.get(i).setFuzzyMatchStatus("fuzzymatched");
                     }
                     else {
-                        if(FuzzySearch.partialRatio(s.toLowerCase(), spacecrafts.get(i).getNamaproduk().toLowerCase()+" "+spacecrafts.get(i).getKodeodoo()+" "+spacecrafts.get(i).getBarcode()) > 80){
+                        if(FuzzySearch.partialRatio(s.toLowerCase(), spacecrafts.get(i).getNamaproduk().toLowerCase()+" "+spacecrafts.get(i).getKodeodoo()+" "+spacecrafts.get(i).getBarcode()) > fuzzyscore){
                             spacecrafts.get(i).setFuzzyMatchStatus("fuzzymatched");
                         }
                         else {
@@ -114,12 +115,12 @@ public class OthersWardahFragment extends Fragment {
             @Override
             public boolean onQueryTextChange(String query) {
                 for(int i = 0; i < spacecrafts.size(); i++){
-                    Log.d("FUZZY RATIO "+query+" : "+spacecrafts.get(i).getNamaproduk(), ""+ FuzzySearch.partialRatio(query, spacecrafts.get(i).getNamaproduk()));
+                    Log.d("FUZZY RATIO "+query+" LENGTH("+query.length()+") : "+spacecrafts.get(i).getNamaproduk()+" "+spacecrafts.get(i).getKodeodoo()+" "+spacecrafts.get(i).getBarcode(), "RATIO : "+ FuzzySearch.partialRatio(query, spacecrafts.get(i).getNamaproduk()));
                     if(query.length() == 0){
                         spacecrafts.get(i).setFuzzyMatchStatus("fuzzymatched");
                     }
                     else {
-                        if(FuzzySearch.partialRatio(query.toLowerCase(), spacecrafts.get(i).getNamaproduk().toLowerCase()+" "+spacecrafts.get(i).getKodeodoo()+" "+spacecrafts.get(i).getBarcode()) > 80){
+                        if(FuzzySearch.partialRatio(query.toLowerCase(), spacecrafts.get(i).getNamaproduk().toLowerCase()+" "+spacecrafts.get(i).getKodeodoo()+" "+spacecrafts.get(i).getBarcode()) > fuzzyscore){
                             spacecrafts.get(i).setFuzzyMatchStatus("fuzzymatched");
                         }
                         else {
