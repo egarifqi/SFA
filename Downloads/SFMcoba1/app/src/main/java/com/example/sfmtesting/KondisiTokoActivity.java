@@ -2,6 +2,7 @@ package com.example.sfmtesting;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
@@ -44,6 +45,7 @@ public class KondisiTokoActivity extends AppCompatActivity implements View.OnCli
     public void onClick(View view) {
         if(view == layoutKondisiShelving){
             Toast.makeText(KondisiTokoActivity.this, "Kondisi Shelving ....", Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(KondisiTokoActivity.this, ReportKondisiShelvingActivity.class));
         }
 
         if(view == layoutReportCompetitor){

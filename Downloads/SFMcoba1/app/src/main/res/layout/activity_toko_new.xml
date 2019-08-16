@@ -25,10 +25,11 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="100dp"
         android:layout_marginEnd="8dp"
-        android:text="Nama Toko"
+        android:text="Nama Tokonya dicoba kalau panjang jadi gimana"
         android:textColor="#FFF"
         android:textSize="28sp"
         android:textStyle="bold"
+        android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -369,7 +370,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
-                    android:layout_marginTop="24dp"
+                    android:layout_marginTop="15dp"
                     android:layout_marginEnd="8dp"
                     android:ems="6"
                     android:text="Program Diikuti"
@@ -391,7 +392,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="260dp"
                     android:layout_marginStart="8dp"
-                    android:layout_marginTop="24dp"
+                    android:layout_marginTop="15dp"
                     android:layout_marginEnd="8dp"
                     android:layout_marginBottom="8dp" />
             </LinearLayout>

@@ -24,7 +24,8 @@
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning"
         tools:replace="android:appComponentFactory">
-        <activity android:name=".KondisiTokoActivity"></activity>
+        <activity android:name=".ReportKondisiShelvingActivity"></activity>
+        <activity android:name=".KondisiTokoActivity" />
         <activity android:name=".RRingkasanEminaActivity" />
         <activity android:name=".RRingkasanWardahActivity" />
         <activity android:name=".ReturPutriActivity" />
